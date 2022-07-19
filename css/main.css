@@ -1,0 +1,41 @@
+.header {
+  background-color: #386ABB;
+  padding: 2vh;
+}
+
+.header__nav__ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header__nav__ul__li {
+  display: inline-block;
+}
+
+.header__nav__ul__li:hover {
+  -webkit-transform: rotate(5deg);
+          transform: rotate(5deg);
+}
+
+.header__nav__ul__li--a {
+  text-decoration: none;
+  opacity: 0.8;
+  color: #FFCC03;
+}
+
+.header__nav__ul__li--a:hover {
+  opacity: 1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+/*# sourceMappingURL=main.css.map */

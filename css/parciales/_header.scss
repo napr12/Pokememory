@@ -1,0 +1,26 @@
+.header{
+    background-color: $secundariColor;
+    padding: 2vh;
+    &__nav{
+        &__ul{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            &__li{
+                display: inline-block;
+                &:hover{
+                    transform:rotate(5deg);
+                }
+                &--a{
+                    text-decoration: none;
+                    opacity: 0.8;
+                    color:$textColor;
+                    &:hover{
+                        opacity: 1;
+                    }
+                    
+                }
+            }
+        }
+    }
+}
