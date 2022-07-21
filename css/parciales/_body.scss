@@ -1,0 +1,37 @@
+.main{
+
+    background-color: $background;
+    color:$textColor;
+    display: grid;
+    grid-template-columns: 2fr 8fr 2fr;
+    grid-template-areas: "null logo logo" "null opcion maxGan" "null jugador jugador";
+    justify-content: center;
+    align-items: center;
+    
+    &__section{
+        margin: 0em 1em;
+        &__arcticle{
+            margin-bottom: 1em;
+            &--img{
+                display: inline-block;
+                margin-left: 50%;
+            }
+        }
+        &.opcion{
+            grid-area: opcion;
+            margin-bottom: 2em;
+        }
+        &.logo{
+            grid-area: logo;
+            margin: 2em 0em;
+            
+        }
+        &.maxGan{
+            grid-area: maxGan;
+        }
+        &.jugador{
+            grid-area: jugador;
+            display: none;
+        }
+    }
+}
