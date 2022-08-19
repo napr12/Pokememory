@@ -16,66 +16,25 @@ class Ficha{
     }
 }
 
-// class Tablero{
-    
-//     constructor(pColumna, pFila){
-//         this.Tablero = [];
-//         this.Columna=pColumna;
-//         this.Fila=pFila;
-//         for(let i=0 ; i<pColumna; i++){
-//             let columna =[];
-//             for(let j=0; j<pFila;j++){
-//                 columna.push(i," ", j," Columna");
-//             }
-//             this.Tablero.push(columna);
-//         }
-//     }
 
-// }
 
 //Fuciones -----------------------------------------------------------------------------
-const CrearFicha = (nombre, id, nombreObjeto) => {
-    for (propiedad in Ficha)
-    {   
-        if(propiedad == "nombre")
-            nombreObjeto.propiedad=nombre;
-        else if(propiedad == "id")
-            nombreObjeto.propiedad=id;
-        else
-            continue
-    } 
-}
+const CrearFicha = (nombreObjeto) =>  nombreObjeto= new Ficha(nombreObjeto,Math.floor(Math.random()*100,"nada"))
+
 const CrearJugador = () =>  new Jugador(prompt("Ingrese el nombre del jugador").toUpperCase(), 0);
 
-// const CrearTablero = () => {
-//     let opcionMedidas= true;
-//     do{
-//         let opcion = Number(prompt("Ingrese una opción \n 1 - 4X2  \n 2 - 4X4 \n 3 - 8X8"));
-//         let matriz = [];
-//         switch(opcion){
-//             case 1: 
-                
-//                 return new Tablero(4,2);
-            
-//             case 2: 
-               
-//                 return new Tablero(4,4);
-
-//             case 3: 
-                
-//                 return new Tablero(8,8);
-                
-//             default:
-//                 alert("Ingrese una opción valida");
-//                 break;
-//         }
-//     }while(opcionMedidas)
-// }
-
+const Encontrar = (ficha1, ficha2) => { 
+    if(ficha1.id === ficha2.id){
+        return true;
+    }else{
+        return false
+    }
+}
+const sumarPts= jugador=> jugador.puntaje++;
 //Variables-----------------------------------------------------------------------------
 const Jugadores = [];
 let opcionValida = true;
-const Tablero = [];
+const Fichas = [];
 
 //----------------------------------------------------------------------------------------
 while (opcionValida){
@@ -92,14 +51,41 @@ while (opcionValida){
     }
 }
 
+do{
+    let cantidad = Number(prompt("Ingrese el tamaño del tablero: \n 1 - 2 x 2 \n 2 - 4 X2 \n 3- 4x4"));
+    switch(cantidad){
+        case 1:
+            for(let i=0 ; i<2 ; i++){
+                Fichas.push(CrearFicha(i));
+            } 
+            break;
+        case 2: 
+            for(let i=0 ; i<4 ; i++){
+                Fichas.push(CrearFicha(i));
+            } 
+            break;
+        case 3:
+            for(let i=0 ; i<8 ; i++){
+                Fichas.push(CrearFicha(i));
+            }
+            break; 
+    } 
+}while(opcionValida);
 
 
-//const TableroJuego = CrearTablero();
-let ficha = new Ficha("ficha1",1,"nada");
-console.log(ficha);
+const Tablero = Fichas.concat(Fichas);
 
-for(tablero of TableroJuego ){
-    console.log(tablero.Columna)
+const jugar = (jugador) =>{
+    let opcion1= Number(prompt("Ingrese el número de la ficha"));
+    let opcion2= Number(prompt("Ingrese el número de la ficha"));
+    while(Encontrar(opcion1, opcion2)){
+        indice1=Tablero.indexOf(ficha1.id);
+        Tablero.splice(indice1,1);
+        indice2=Tablero.indexOf(ficha2.id);
+        Tablero.splice(indice2,1);
+        opcion1=Number(prompt("Ingrese el número de la ficha"));;
+        opcion2=Number(prompt("Ingrese el número de la ficha"));;
+    }
 }
 
 for (const jugador of Jugadores) {
