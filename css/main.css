@@ -41,7 +41,7 @@
   display: grid;
   -ms-grid-columns: 2fr 8fr 2fr;
       grid-template-columns: 2fr 8fr 2fr;
-      grid-template-areas: "null logo logo" "null opcion maxGan" "null jugador jugador";
+      grid-template-areas: ". logo logo" ". opcion maxGan" ". jugador jugador";
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -61,6 +61,11 @@
 .main__section__arcticle--img {
   display: inline-block;
   margin-left: 50%;
+}
+
+.main__section__arcticle.juego > img {
+  width: 5px;
+  height: 5px;
 }
 
 .main__section.opcion {

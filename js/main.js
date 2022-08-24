@@ -74,8 +74,18 @@ do{
 
 
 const Tablero = Fichas.concat(Fichas);
-
-const jugar = (jugador) =>{
+const areaJuego= document.getElementsByClassName('juego')[0];
+console.log(areaJuego);
+for(pieza of Tablero ){
+    let img = document.createElement("img");
+    img.setAttribute("class", "ficha");
+    img.setAttribute("src","../img/volteado.jpg");
+    
+    console.log(img);
+    areaJuego.appendChild(img);
+}
+console.log(areaJuego);
+/*const jugar = (jugador) =>{
     let opcion1= Number(prompt("Ingrese el número de la ficha"));
     let opcion2= Number(prompt("Ingrese el número de la ficha"));
     while(Encontrar(opcion1, opcion2)){
@@ -87,7 +97,7 @@ const jugar = (jugador) =>{
         opcion2=Number(prompt("Ingrese el número de la ficha"));;
     }
 }
-
+*/
 for (const jugador of Jugadores) {
     console.log(jugador.nombre);
     console.log(jugador.jugador);

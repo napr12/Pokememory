@@ -4,7 +4,7 @@
     color:$textColor;
     display: grid;
     grid-template-columns: 2fr 8fr 2fr;
-    grid-template-areas: "null logo logo" "null opcion maxGan" "null jugador jugador";
+    grid-template-areas: ". logo logo" ". opcion maxGan"". jugador jugador";
     justify-content: center;
     align-items: center;
     
@@ -16,6 +16,16 @@
                 display: inline-block;
                 margin-left: 50%;
             }
+            &.juego{
+            
+                
+                & > img {
+                    width: 5px;
+                    height: 5px;
+                }
+                
+            }
+          
         }
         &.opcion{
             grid-area: opcion;
@@ -33,5 +43,6 @@
             grid-area: jugador;
             display: none;
         }
+        
     }
 }
