@@ -4,26 +4,34 @@
     color:$textColor;
     display: grid;
     grid-template-columns: 2fr 8fr 2fr;
-    grid-template-areas: ". logo logo" ". opcion maxGan"". jugador jugador";
+    grid-template-areas: ". logo logo" ". opcion maxGan" ". jugador jugador" "juego juego juego";
     justify-content: center;
     align-items: center;
     
     &__section{
         margin: 0em 1em;
-        &__arcticle{
+        &__article{
             margin-bottom: 1em;
             &--img{
                 display: inline-block;
                 margin-left: 50%;
+                
+            }
+            &--button{
+                border-radius: 10%;
+                background-color: $secundariColor;
+                color:$textColor;
+                border-color: $secundariColor;
             }
             &.juego{
-            
-                
-                & > img {
-                    width: 5px;
-                    height: 5px;
+                display: grid;
+                grid-template-columns: 3fr 3fr 3fr 3fr;
+                grid-template-rows: 3fr 3fr 3fr 3fr;
+                grid-template-areas: "f16 f15 f14 f13" "f8 f1 f2 f6" "f7 f3 f4 f5" "f10 f9 f11 f12";          
+                & .ficha {
+                    width: 60%;
+                    
                 }
-                
             }
           
         }
@@ -42,7 +50,19 @@
         &.jugador{
             grid-area: jugador;
             display: none;
+            
+        }
+        &.juego{
+            grid-area: juego;
+            
+            
         }
         
+    }
+}
+
+@each $llave, $valor in $fichas{
+    ##{$llave}{
+        grid-area: $valor;
     }
 }

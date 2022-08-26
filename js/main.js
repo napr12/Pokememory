@@ -19,9 +19,9 @@ class Ficha{
 
 
 //Fuciones -----------------------------------------------------------------------------
-const CrearFicha = (nombreObjeto) =>  nombreObjeto= new Ficha(nombreObjeto,Math.floor(Math.random()*100,"nada"))
+const CrearFicha = (nombreObjeto) =>  nombreObjeto = new Ficha(nombreObjeto,Math.floor(Math.random()*100,"nada"))
 
-const CrearJugador = () =>  new Jugador(prompt("Ingrese el nombre del jugador").toUpperCase(), 0);
+const CrearJugador = (nombre) =>  new Jugador(nombre, 0);
 
 const Encontrar = (ficha1, ficha2) => { 
     if(ficha1.id === ficha2.id){
@@ -37,22 +37,8 @@ let opcionValida = true;
 const Fichas = [];
 
 //----------------------------------------------------------------------------------------
-while (opcionValida){
-    let opcion = Number(prompt("Ingrese una opción \n 1 - JUGADOR VS  COM  \n 2 - JUGADOR VS JUGADOR"));
-    if(opcion===1){
-        Jugadores.push(CrearJugador());
-        opcionValida=false;
-    }else if(opcion===2){
-        Jugadores.push(CrearJugador());
-        Jugadores.push(CrearJugador());
-        opcionValida=false;
-    }else{
-        alert("Ingrese una opción valida");
-    }
-}
 
-do{
-    let cantidad = Number(prompt("Ingrese el tamaño del tablero: \n 1 - 2 x 2 \n 2 - 4 X2 \n 3- 4x4"));
+const CrearTablero = (cantidad)=>{
     switch(cantidad){
         case 1:
             for(let i=0 ; i<2 ; i++){
@@ -70,19 +56,21 @@ do{
             }
             break; 
     } 
-}while(opcionValida);
+}
 
 
 const Tablero = Fichas.concat(Fichas);
-const areaJuego= document.getElementsByClassName('juego')[0];
+const areaJuego= document.getElementsByClassName('juego')[1];
 console.log(areaJuego);
+let numeroPieza=1;
 for(pieza of Tablero ){
     let img = document.createElement("img");
-    img.setAttribute("class", "ficha");
+    img.setAttribute("class", `ficha f${numeroPieza}` );
     img.setAttribute("src","../img/volteado.jpg");
-    
+    img.setAttribute("id", `f${numeroPieza}`);
     console.log(img);
     areaJuego.appendChild(img);
+    numeroPieza++;
 }
 console.log(areaJuego);
 /*const jugar = (jugador) =>{
@@ -102,3 +90,11 @@ for (const jugador of Jugadores) {
     console.log(jugador.nombre);
     console.log(jugador.jugador);
 }
+let com = document.getElementById("com");
+let formJugador = document.getElementsByClassName('jugador')[0]; 
+com.onclick = () => formJugador.style.cssText=`display: inline;`
+let jugar = document.getElementById("jugar");
+let player1 = document.getElementById("player1");
+let tamanio = document.querySelector("input[name=tamanio]:checked");
+jugar.onclick = () => Jugadores.push(CrearJugador(player1.value))
+//jugar.onclick = () =>CrearTablero(tamanio.values)
