@@ -45,15 +45,9 @@
   color: #FFCC03;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 2fr 8fr 2fr;
-      grid-template-columns: 2fr 8fr 2fr;
-      grid-template-areas: ". logo logo" ". opcion maxGan" ". jugador jugador" "juego juego juego";
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-grid-columns: 4fr 4fr 4fr;
+      grid-template-columns: 4fr 4fr 4fr;
+      grid-template-areas: ". logo ." ". opcion maxGan" ". jugador ." "juego juego juego";
 }
 
 .main__section {
@@ -66,7 +60,6 @@
 
 .main__section__article--img {
   display: inline-block;
-  margin-left: 50%;
 }
 
 .main__section__article--button {
@@ -88,6 +81,7 @@
 
 .main__section__article.juego .ficha {
   width: 60%;
+  margin-bottom: 1%;
 }
 
 .main__section.opcion {
@@ -100,9 +94,7 @@
 .main__section.logo {
   -ms-grid-row: 1;
   -ms-grid-column: 2;
-  -ms-grid-column-span: 2;
   grid-area: logo;
-  margin: 2em 0em;
 }
 
 .main__section.maxGan {
@@ -114,7 +106,6 @@
 .main__section.jugador {
   -ms-grid-row: 3;
   -ms-grid-column: 2;
-  -ms-grid-column-span: 2;
   grid-area: jugador;
   display: none;
 }

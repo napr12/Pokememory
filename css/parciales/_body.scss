@@ -3,10 +3,10 @@
     background-color: $background;
     color:$textColor;
     display: grid;
-    grid-template-columns: 2fr 8fr 2fr;
-    grid-template-areas: ". logo logo" ". opcion maxGan" ". jugador jugador" "juego juego juego";
-    justify-content: center;
-    align-items: center;
+    grid-template-columns: 4fr 4fr 4fr;
+    grid-template-areas: ". logo ." ". opcion maxGan" ". jugador ." "juego juego juego";
+    //justify-content: center;
+    //align-items: center;
     
     &__section{
         margin: 0em 1em;
@@ -14,7 +14,7 @@
             margin-bottom: 1em;
             &--img{
                 display: inline-block;
-                margin-left: 50%;
+                
                 
             }
             &--button{
@@ -30,6 +30,7 @@
                 grid-template-areas: "f16 f15 f14 f13" "f8 f1 f2 f6" "f7 f3 f4 f5" "f10 f9 f11 f12";          
                 & .ficha {
                     width: 60%;
+                    margin-bottom: 1%;
                     
                 }
             }
@@ -41,7 +42,7 @@
         }
         &.logo{
             grid-area: logo;
-            margin: 2em 0em;
+            
             
         }
         &.maxGan{
