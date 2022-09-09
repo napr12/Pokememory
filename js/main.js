@@ -31,6 +31,7 @@ const Iniciar = (e) =>{
     }else{
         CrearTablero(Number(datos.children[7].value))
     }
+    saludar(Jugadores[0].nombre);
 }
 const CrearTablero = (cantidad)=>{
     let numeroPieza=1;
@@ -81,7 +82,22 @@ const turno = () =>{
                 },2000)
         })
 }
-
+const saludar = (nombreJugador) =>{
+    Toastify({
+        text: `Bienvenido ${nombreJugador}`,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "top",
+        position: "left", 
+        stopOnFocus: true, 
+        style: {
+          background: "linear-gradient(to right, #FFCC03, #ef5350)",
+          color:"#386ABB",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
+}
 //--------------------------------------------------------------------------------------
 //Variables-----------------------------------------------------------------------------
 const Jugadores = [];
