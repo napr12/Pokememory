@@ -24,14 +24,24 @@ const Iniciar = (e) =>{
     let datos = e.target;
     Jugadores.push(CrearJugador(datos.children[1].value));
     if(datos.children[3].checked){
-        CrearTablero(Number(datos.children[3].value))
-        console.log(datos.children[3].value);
+        CrearTablero(Number(datos.children[3].value));
+        saludar(Jugadores[0].nombre);
     }else if (datos.children[5].checked){
-        CrearTablero(Number(datos.children[5].value))
+        CrearTablero(Number(datos.children[5].value));
+        saludar(Jugadores[0].nombre);
+    }else if (datos.children[7].checked){
+        CrearTablero(Number(datos.children[7].value));
+        saludar(Jugadores[0].nombre);
     }else{
-        CrearTablero(Number(datos.children[7].value))
+        alertaError("DEBE SELECCIONAR UNA OPCIÓN VALIDA","REINTENTAR")
     }
-    saludar(Jugadores[0].nombre);
+    
+}
+const alertaError = (textoMensaje, buttonTexto) => {
+    swal({
+        text: textoMensaje,
+        icon:"./img/Error.jpg",
+        button:buttonTexto});
 }
 const CrearTablero = (cantidad)=>{
     let numeroPieza=1;
@@ -74,6 +84,12 @@ const CrearTablero = (cantidad)=>{
         numeroPieza++;
     }
     
+}
+const IniciarJuego = () =>{
+    const fichas = document.getElementsByClassName("ficha");
+    while(fichas.length>0){
+        
+    }
 }
 const turno = () =>{
         return new Promise((resolve,reject)=>{
