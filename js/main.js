@@ -17,14 +17,28 @@ class Ficha{
 //Fuciones -------------------------------------------------------------------------------
 const CrearFicha = async ()=>{
     //nombreObjeto = new Ficha(nombreObjeto,Math.floor(Math.random()*100,"nada"));
-    const obtenerFicha = await fetch(`https://pokeapi.co/api/v2/pokemon-form/${Math.floor(Math.random()*100)}/`);
+    let id =  Number(crearID());
+    const obtenerFicha = await fetch(`https://pokeapi.co/api/v2/pokemon-form/${id}/`);
     const dataFicha = await obtenerFicha.json();
     return new Ficha(dataFicha.name, dataFicha.id, dataFicha.sprites.front_default); 
-    
 }  
-
+const crearID = () =>{
+    let identificador = 1; 
+    while(Fichas.some((el) => el.id === identificador)){
+        identificador =  Math.floor(Math.random()*100);
+        console.log("Entra");
+    }
+    return identificador;
+}
+const sleep =  () =>  new Promise( async (resolve) => setTimeout(()=>resolve(console.log("Espera 2 segundos")),2000))
 const CrearJugador = nombre => new Jugador(nombre, 0) ;
-const Encontrar = (ficha1, ficha2) =>  ficha1.id == ficha2.id ?  true :  false;
+const Encontrar = (ficha1, ficha2) =>{  
+    if(ficha1 == ficha2){
+        console.log("Entra Ecnontra")
+        return true;
+    }
+       return  false;
+}
 const sumarPts= jugador=> jugador.puntaje++;
 const Iniciar = async (e) =>{
     e.preventDefault();
@@ -36,32 +50,38 @@ const Iniciar = async (e) =>{
     }else if (datos.children[5].checked){
         await CrearTablero(Number(datos.children[5].value));
         saludar(Jugadores[0].nombre);
-    }else if (datos.children[7].checked){
-        await CrearTablero(Number(datos.children[7].value));
-        saludar(Jugadores[0].nombre);
-    }else{
+    }else {
         alertaError("DEBE SELECCIONAR UNA OPCIÓN VALIDA","REINTENTAR");
     }
     let tarjetas = document.getElementsByClassName("ficha");
     console.log("Llega");
     for (const element of tarjetas) {
-        element.onclick = (e) => { 
+        element.onclick = async (e) => { 
             e.preventDefault();
             let datos = e.target;
             let posicion = Number(datos.id[1])-1;
-            datos.src= Tablero[posicion].imagen;
-            console.log(Tablero[posicion].imagen);   
-         };
+            datos.src = Tablero[posicion].imagen;
+            datos.className += " Volteado";
+            if(document.getElementsByClassName('Volteado').length==2){
+                await sleep();
+                if(!Encontrar(document.getElementsByClassName('Volteado')[0].src, document.getElementsByClassName('Volteado')[1].src))
+                {
+                    document.getElementsByClassName('Volteado')[0].setAttribute("src","../img/volteado.jpg");
+                    document.getElementsByClassName('Volteado')[1].setAttribute("src","../img/volteado.jpg");
+                }else{
+                    document.getElementsByClassName('Volteado')[0].className += " Encontrada";
+                    document.getElementsByClassName('Volteado')[1].className += " Encontrada";
+                    sumarPts(Jugadores[0]);
+                }
+                document.getElementsByClassName('Volteado')[1].classList.remove("Volteado");
+                document.getElementsByClassName('Volteado')[0].classList.remove("Volteado");
+                console.log("Compara")
+            }
+            
+        };
     }
 }
-/*
-const Voltear= (e) => { 
-    e.preventDefault();
-    let datos = e.target;
-    let posicion = Number(datos.id[1]);
-    datos.src= Tablero[posicion].imagen;
-    console.log("Entra");   
- }*/
+
 const alertaError = (textoMensaje, buttonTexto) => {
     swal({
         text: textoMensaje,
@@ -77,26 +97,28 @@ const CrearTablero = async (cantidad) => {
         case 1:
             for(let i=0 ; i<2 ; i++){
                 Fichas.push( await CrearFicha());
-                Tablero.push(Fichas[i]);
-                Tablero.push(Fichas[i]);
             } 
             break;
         case 2: 
             for(let i=0 ; i<4 ; i++){
                 Fichas.push(await CrearFicha());
-                Tablero.push(Fichas[i]);
-                Tablero.push(Fichas[i]);
             } 
             break;
-        case 3:
-            for(let i=0 ; i<8 ; i++){
-                Fichas.push(await CrearFicha());
-                Tablero.push(Fichas[i]);
-                Tablero.push(Fichas[i]);
-            }
-            break; 
     }
-    console.log(areaJuego.children);
+    //Fichas.sort(()=>Math.random()-0.5);
+    Tablero.push(...Fichas.sort((a,b)=>a.id - b.id));
+     
+    Tablero.push(...Fichas.sort((a,b)=>{ 
+        if(a.nombre<b.nombre){
+            return 1;
+        }
+        if(a.nombre>b.nombre){
+            return -1;
+        }
+        return 0;
+    }));
+    
+    console.log(...Tablero);
    while(areaJuego.firstChild){
         areaJuego.removeChild(areaJuego.firstChild);
    }
@@ -116,13 +138,7 @@ const IniciarJuego = () =>{
         
     }
 }
-const turno =  () =>{
-        return new Promise((resolve,reject)=>{
-                setTimeout(()=>{
-                    Encontrar(ficha)?resolve('Encontro ficha') :reject('No encontro ficha');
-                },2000)
-        })
-}
+
 const saludar = (nombreJugador) =>{
     Toastify({
         text: `Bienvenido ${nombreJugador}`,
