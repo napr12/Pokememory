@@ -30,7 +30,7 @@ const crearID = () =>{
     }
     return identificador;
 }
-const sleep =  () =>  new Promise( async (resolve) => setTimeout(()=>resolve(console.log("Espera 2 segundos")),2000))
+const sleep =  () =>  new Promise( async (resolve) => setTimeout(()=>resolve(console.log("Espera 2 segundos")),200))
 const CrearJugador = nombre => new Jugador(nombre, 0) ;
 const Encontrar = (ficha1, ficha2) =>{  
     if(ficha1 == ficha2){
